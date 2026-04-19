@@ -1,0 +1,9 @@
+_tasks:
+  - ["uv", "init", "--lib"]
+  - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "--dev"]
+  - ["uv", "run", "pre-commit", "install"]
+
+project_name:
+  type: str
+  default: "{{ _folder_name }}"
+  when: false

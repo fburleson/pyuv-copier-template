@@ -1,0 +1,36 @@
+name: bump dev version
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history for tags/versions
+
+      - name: install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: register PAT
+        run: echo "${{ secrets.SYSFACTOR_READ_ACCESS }}" | gh auth login --with-token
+
+      - name: config git credential helper
+        run: gh auth setup-git
+
+      - name: bump dev version
+        run: uv version --bump dev
+
+      - name: commit and push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add pyproject.toml uv.lock
+          git commit -m "chore: bump dev version [skip ci]"
+          git push
