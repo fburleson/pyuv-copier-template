@@ -18,9 +18,6 @@ jobs:
       - name: install uv
         uses: astral-sh/setup-uv@v5
 
-      - name: config git credential helper
-        run: gh auth setup-git
-
       - name: bump dev version
         run: uv version --bump dev
 
