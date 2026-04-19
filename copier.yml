@@ -3,7 +3,7 @@ _tasks:
   - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "--dev"]
   - ["uv", "run", "pre-commit", "install"]
   - ["git", "add", "*"]
-  - ["git", "commit", "-m", "\"first commit\""]
+  - ["git", "commit", "-m", "first commit"]
   - ["git", "branch", "dev"]
   - ["git", "checkout", "dev"]
   - ["git", "branch", "--list"]
