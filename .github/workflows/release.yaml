@@ -1,0 +1,37 @@
+name: release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: install uv
+        uses: astral-sh/setup-uv@v5
+      
+      - name: release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+        
+          uv version --bump stable
+
+          git tag -a "v$(uv version --short)" -m "release v$(uv version --short)"
+          git add pyproject.toml uv.lock
+          git commit -m "release v$(uv version --short)"
+          git push
+          
+          uv build
+          
+          gh release create $(uv version --short) dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
