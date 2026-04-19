@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/install_uv
-      - run: uv run --extra mt5 pyright .
+      - run: uv run --all-extras pyright .
 
   tests:
     runs-on: windows-latest
@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/install_uv
-      - run: uv run --extra mt5 pytest -v
+      - run: uv run --all-extras pytest -v
  
   build:
     runs-on: [ubuntu-latest]

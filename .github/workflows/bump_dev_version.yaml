@@ -18,9 +18,6 @@ jobs:
       - name: install uv
         uses: astral-sh/setup-uv@v5
 
-      - name: register PAT
-        run: echo "${{ secrets.SYSFACTOR_READ_ACCESS }}" | gh auth login --with-token
-
       - name: config git credential helper
         run: gh auth setup-git
 
