@@ -1,9 +1,9 @@
 _tasks:
   - ["uv", "init", "--lib"]
-  - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "--dev"]
-  - ["uv", "run", "pre-commit", "install"]
+  - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "conventional-pre-commit", "--dev"]
+  - ["uv", "run", "pre-commit", "install", "--hook-type", "commit-msg", "--hook-type", "pre-commit"]
   - ["git", "add", "*"]
-  - ["git", "commit", "-m", "first commit"]
+  - ["git", "commit", "-m", "chore(setup): first commit"]
   - ["git", "branch", "dev"]
   - ["git", "checkout", "dev"]
   - ["git", "branch", "--list"]
