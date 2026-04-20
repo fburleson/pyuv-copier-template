@@ -18,8 +18,10 @@ _tasks:
     {% if not is_lib %}
     python -c "import os; os.makedirs('src', exist_ok=True); os.replace('main.py', 'src/main.py')"
     {% endif %}
-  - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "conventional-pre-commit", "--dev"]
+  - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "conventional-pre-commit", "git+https://github.com/fburleson/pman.git", "--dev",]
   - ["uv", "run", "pre-commit", "install", "--hook-type", "commit-msg", "--hook-type", "pre-commit"]
+  - ["uv", "version", "0.1.0.dev0"]
+  - ["git", "branch", "-m", "main"]
   - ["git", "add", "*"]
   - ["git", "commit", "-m", "chore(setup): first commit"]
   - ["git", "branch", "dev"]
