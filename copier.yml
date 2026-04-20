@@ -1,5 +1,23 @@
+project_name:
+  type: str
+  default: "{{ _folder_name }}"
+  when: false
+
+is_lib:
+  type: bool
+  default: true
+
 _tasks:
-  - ["uv", "init", "--lib"]
+  - >
+    {% if is_lib %}
+    uv init --lib
+    {% else %}
+    uv init
+    {% endif %}
+  - >
+    {% if not is_lib %}
+    python -c "import os; os.makedirs('src', exist_ok=True); os.replace('main.py', 'src/main.py')"
+    {% endif %}
   - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "conventional-pre-commit", "--dev"]
   - ["uv", "run", "pre-commit", "install", "--hook-type", "commit-msg", "--hook-type", "pre-commit"]
   - ["git", "add", "*"]
@@ -7,8 +25,3 @@ _tasks:
   - ["git", "branch", "dev"]
   - ["git", "checkout", "dev"]
   - ["git", "branch", "--list"]
-
-project_name:
-  type: str
-  default: "{{ _folder_name }}"
-  when: false
