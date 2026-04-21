@@ -16,6 +16,7 @@ Refer to `./README.md` for a project overview.
 uv run pytest
 uv run pyright
 uv run main.py
+uv run pman finish
 ```
 
 ```bash
@@ -23,6 +24,7 @@ uv run main.py
 pytest
 pyright
 python main.py
+pman finish
 ```
 
 ## Code style
@@ -79,6 +81,6 @@ Use one of the following commit tags depending on the commit:
 # examples
 git commit -m "docs(readme): add installation instructions"
 git commit -m "fix(parsing): fix data not being parsed correctly"
-fir commit -m "feat(bot): add bot class to automate flow"
+git commit -m "feat(bot): add bot class to automate flow"
 ```
 
