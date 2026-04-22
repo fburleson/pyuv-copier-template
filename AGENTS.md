@@ -32,21 +32,45 @@ pman finish
 - Always use snake_case for variable names and function names
 - Always use PascalCase for class names
 - Always use type hints
+- Always document your code. Use Google style format.
 
 ```py
 # correct
 class MyClass:
     def my_func(a: int, b: int) -> str:
+        """
+        Calculates the product of two integers and returns it as a string.
+
+        Args:
+            a (int): The first number.
+            b (int): The second number.
+
+        Returns:
+            str: The product of two integers.
+
+        Raises:
+            RuntimeError: If the product is 0.
+        """
         my_result = a * b
+        if my_result == 0:
+            raise RuntimeError("I do not like the number 0")
         return str(my_result)
 ```
 ```py
 # incorrect
 class my_class:
     def myFunc(a, b):
+        """This funciotn does somthing.
+        
+        args
+        ------
+        a: number 1
+        b: number 2
+        """
         MyResult =  a * b
         return str(MyResult)
 ```
+
 
 ## Constraints
 
