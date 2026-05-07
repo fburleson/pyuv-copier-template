@@ -3,6 +3,11 @@ project_name:
   default: "{{ _folder_name }}"
   when: false
 
+python_version:
+  type: str
+  default: "__PYTHON_VERSION__"
+  when: false
+
 is_lib:
   type: bool
   default: true
@@ -20,6 +25,19 @@ _tasks:
     {% endif %}
   - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "conventional-pre-commit", "--dev",]
   - ["uv", "run", "pre-commit", "install", "--hook-type", "commit-msg", "--hook-type", "pre-commit"]
+  - [
+      "python",
+      "-c",
+      "import os; f=open('.gitignore', 'a'); f.write('\\n.dev/\\n') if '.dev/' not in open('.gitignore').read() else None; f.close();",
+    ]
+  - [
+      "python",
+      "-c",
+      "f=open('.python-version', 'r'); version=f.read().strip(); f.close();
+      f=open('README.md'); content=f.read(); f.close();
+      content = content.replace('__PYTHON_VERSION__', version);
+      f=open('README.md', 'w'); f.write(content); f.close()"
+    ]
   - ["uv", "version", "0.1.0.dev1"]
   - ["git", "branch", "-m", "main"]
   - ["git", "add", "*"]
