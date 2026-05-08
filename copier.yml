@@ -23,7 +23,7 @@ _tasks:
     {% if not is_lib %}
     python -c "import os; os.makedirs('src', exist_ok=True); os.replace('main.py', 'src/main.py')"
     {% endif %}
-  - ["python", "-c", "os.makedirs('.opencode/plans', exist_ok=True)"]
+  - ["python", "-c", "import os;", "os.makedirs('.opencode/plans', exist_ok=True)"]
   - ["uv", "add", "ruff", "pyright", "pytest", "pre-commit", "conventional-pre-commit", "--dev",]
   - ["uv", "run", "pre-commit", "install", "--hook-type", "commit-msg", "--hook-type", "pre-commit"]
   - [
