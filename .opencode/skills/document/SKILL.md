@@ -16,10 +16,9 @@ Use this skill when asked to document Python code — functions, classes, module
 ## Google Style Rules
 
 ### General
-- Place the docstring immediately after the definition, inside triple double-quotes `"""`.
+- Each `"""` should be on it's own line
 - Start with a single-line summary ending in a period.
 - Leave a blank line after the summary, then add detailed description paragraphs as needed.
-- Indent the closing `"""` on its own line at the same indentation as the opening.
 
 ### Sections (separated by blank lines)
 - **Args:** — One line per parameter: `param_name (type): Description.` Include `type` only if non-obvious.
@@ -42,12 +41,14 @@ Use this skill when asked to document Python code — functions, classes, module
 - Document what the function does, its parameters, return value, and exceptions raised.
 - Omit `Args:` / `Returns:` / `Raises:` sections that would be empty.
 - For abstract/trivial methods (e.g., `__init__` that just assigns fields), a single-line docstring is acceptable.
+- Omit implementation details, describe behaviour
 
 ## Examples
 
 ```python
 def fetch_data(url, timeout=30):
-    """Fetch data from a URL and return parsed JSON.
+    """
+    Fetch data from a URL and return parsed JSON.
 
     Handles HTTP errors and timeouts gracefully, logging
     any failures before re-raising.
@@ -67,7 +68,8 @@ def fetch_data(url, timeout=30):
 
 ```python
 class CircularBuffer:
-    """Fixed-size buffer that overwrites oldest entries.
+    """
+    Fixed-size buffer that overwrites oldest entries.
 
     Attributes:
         capacity (int): Maximum number of items the buffer can hold.
@@ -80,7 +82,8 @@ class CircularBuffer:
 ```
 
 ```python
-"""Utilities for working with file paths.
+"""
+Utilities for working with file paths.
 
 This module provides helpers for path normalization, joining,
 and discovery of project-relative paths.
